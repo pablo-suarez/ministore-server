@@ -4,7 +4,7 @@ import { MongoDBConfig } from '../types/mongo.type';
 
 export default registerAs('mongo', (): MongoDBConfig => {
 
-    const values : MongoDBConfig = {
+    const values: MongoDBConfig = {
         mongoDBHost: process.env.DB_MONGO_HOST,
         mongoDBUser: process.env.DB_MONGO_USER,
         mongoDBName: process.env.DB_MONGO_NAME,
@@ -18,8 +18,8 @@ export default registerAs('mongo', (): MongoDBConfig => {
         mongoDBPassword: Joi.string(),
     });
 
-    const { error } = schema.validate(values, { abortEarly:false });
-    if(error){
+    const { error } = schema.validate(values, { abortEarly: false });
+    if (error) {
         const messageError = `Validation failed - Missing MongoDB variable ${error.message}`;
         throw new Error(messageError);
     }
