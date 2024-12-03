@@ -5,6 +5,9 @@ import { Product, ProductSchema } from './infrastructure/outbound/schemas/produc
 import { ProductsRepositorySymbol } from './domain/products.repository';
 import { MongoProductsRepository } from './infrastructure/outbound/repositories/mongo-products.repository';
 import { CreateProductUseCase } from './application/create-product.usecase';
+import { FileStorageProvider } from '../common/config/providers/file-storage.provider';
+import { FileNaming } from '../common/file-storage/infrastructure/file-naming';
+import { FileSecureUrlAdapter } from '../common/file-storage/infrastructure/file-secure-url.adapter';
 
 @Module({
   imports: [
@@ -13,7 +16,9 @@ import { CreateProductUseCase } from './application/create-product.usecase';
   providers:[{
     provide: ProductsRepositorySymbol,
     useClass: MongoProductsRepository
-  },
+  },FileStorageProvider,
+  FileNaming,
+  FileSecureUrlAdapter,
   CreateProductUseCase],
   controllers: [ProductController]
 })

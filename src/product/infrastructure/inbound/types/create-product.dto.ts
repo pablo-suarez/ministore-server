@@ -1,4 +1,5 @@
-import { IsNumber, IsString } from "class-validator";
+import { Type } from "class-transformer";
+import { IsNumber, IsOptional, IsString } from "class-validator";
 
 export class CreateProductDto {
 
@@ -8,9 +9,8 @@ export class CreateProductDto {
     @IsString()
     readonly sku: string;
 
-    @IsString()
-    readonly picture: string;
-
     @IsNumber()
+    @Type(() => Number)
     readonly price: number;
+
 }

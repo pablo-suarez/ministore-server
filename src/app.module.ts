@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import mongoConfig from './common/config/mongo.config';
 import { MongoModule } from './mongodb/mongodb.module';
 import { ProductModule } from './product/product.module';
+import { FilesModule } from './common/file-storage/files.module';
 
 @Module({
   imports: [ConfigModule.forRoot({
@@ -13,7 +14,8 @@ import { ProductModule } from './product/product.module';
     envFilePath: process.env.PROJECT_ENV ? `.env.${process.env.PROJECT_ENV}` : '.env',
   }),
   MongoModule,
-  ProductModule
+  ProductModule,
+  FilesModule
 ],
   controllers: [AppController],
   providers: [AppService],
