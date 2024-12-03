@@ -15,12 +15,17 @@ export class MongoProductsRepository extends MongoRepository<ProductModelMongo, 
     ) {
         super(productModel);
     }
+
     async createProduct(entity: ProductEntity): Promise<void> {
         const props = entity.getProps();
         await this.persists({
             ...props,
             id: entity.id,
         });
+    }
+
+    findProductById(id: string): Promise<ProductEntity> {
+        return this.findById(id);
     }
 
     mapToPrimitives(data: ProductModelMongo): ProductEntity {

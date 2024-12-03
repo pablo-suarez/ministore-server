@@ -5,11 +5,12 @@ import { ProductResponseDTO } from '../../outbound/responses/product.response';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { pictureFilter } from '../../../../common/file-storage/helpers/pictureFilter.helper';
 import { FileNaming } from '../../../../common/file-storage/infrastructure/file-naming';
+import { FindProductByIdUseCase } from '../../../application/find-by-id-product.usecase';
 
 @Controller('product')
 export class ProductController {
 
-  constructor(private readonly createProductUseCase: CreateProductUseCase, private readonly fileNaming: FileNaming,) { }
+  constructor(private readonly createProductUseCase: CreateProductUseCase, private readonly productFindByIdUseCase:FindProductByIdUseCase, private readonly fileNaming: FileNaming) { }
 
   @Post()
   @UseInterceptors(FileInterceptor('picture', { fileFilter: pictureFilter }))
@@ -19,8 +20,13 @@ export class ProductController {
     const renamedFile = { ...picture, filename: this.fileNaming.generateFileName(picture.originalname) };
     const product = await this.createProductUseCase.execute(createProduct, renamedFile);
 
-    const data = product;
-    return { ...data };
+    return { ...product };
+  }
+
+  @Get(':id')
+  async findPorductById(@Param('id') id: string):Promise<ProductResponseDTO> {
+    const product = await this.productFindByIdUseCase.execute(id);
+    return {... product};
   }
 
 }

@@ -8,6 +8,7 @@ import { CreateProductUseCase } from './application/create-product.usecase';
 import { FileStorageProvider } from '../common/config/providers/file-storage.provider';
 import { FileNaming } from '../common/file-storage/infrastructure/file-naming';
 import { FileSecureUrlAdapter } from '../common/file-storage/infrastructure/file-secure-url.adapter';
+import { FindProductByIdUseCase } from './application/find-by-id-product.usecase';
 
 @Module({
   imports: [
@@ -19,7 +20,8 @@ import { FileSecureUrlAdapter } from '../common/file-storage/infrastructure/file
   },FileStorageProvider,
   FileNaming,
   FileSecureUrlAdapter,
-  CreateProductUseCase],
+  CreateProductUseCase,
+  FindProductByIdUseCase],
   controllers: [ProductController]
 })
 export class ProductModule {}
