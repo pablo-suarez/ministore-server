@@ -26,6 +26,25 @@ export class MongoOrdersRepository
     return this.findByIdAndUpdate(input.id, input, { new: true });
   }
 
+  async findOrdersByDateRange(startDate: Date, endDate: Date): Promise<OrderEntity[]> {
+    const results = await this.model.find({
+      createdAt: { $gte: startDate, $lte: endDate },
+    });
+    return results.map(this.mapToPrimitives);
+  }
+  
+  async findHighestAmountOrder(): Promise<OrderEntity | null> {
+    const highestOrder = await this.model
+    .findOne()
+      .sort({ total: -1 })
+      .exec();
+
+    if (!highestOrder) {
+      return null;
+    }
+    return this.mapToPrimitives(highestOrder);
+  }
+
   mapToPrimitives(data: OrderModelMongo): OrderEntity {
     return OrderEntity.fromPrimitives({
       id: data._id,

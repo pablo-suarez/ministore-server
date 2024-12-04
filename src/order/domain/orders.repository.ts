@@ -8,4 +8,6 @@ export const OrdersRepositorySymbol = Symbol.for('OrdersRepository');
 export interface OrdersRepository {
     createOrder(input: OrderEntity): Promise<void>;
     updateOrder(input: UpdateOrderCommand): Promise<OrderEntity>;
+    findOrdersByDateRange(startDate: Date, endDate: Date): Promise<OrderEntity[]>;
+    findHighestAmountOrder(): Promise<OrderEntity | null>;
 }

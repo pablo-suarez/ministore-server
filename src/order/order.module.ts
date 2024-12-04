@@ -1,3 +1,4 @@
+import { GetHighestOrderUseCase } from './application/get-highest-order.usecase';
 import { AuthModule } from './../auth/auth.module';
 import { Module } from '@nestjs/common';
 import { OrderController } from './infrastructure/inbound/order.controller';
@@ -10,6 +11,7 @@ import { ProductModule } from '../product/product.module';
 import { ValidateProductsService } from './domain/services/validate-products.service';
 import { UpdateOrderUseCase } from './application/update-order.usecase';
 import { GetTotalService } from './domain/services/get-total.service';
+import { GetTotalSoldLastMonthUseCase } from './application/get-total-last-month.usecase';
 
 @Module({
   imports: [
@@ -24,7 +26,9 @@ import { GetTotalService } from './domain/services/get-total.service';
     CreateOrderUseCase,
     UpdateOrderUseCase,
     ValidateProductsService,
-    GetTotalService
+    GetTotalService,
+    GetTotalSoldLastMonthUseCase,
+    GetHighestOrderUseCase
   ],
   controllers: [OrderController]
 })

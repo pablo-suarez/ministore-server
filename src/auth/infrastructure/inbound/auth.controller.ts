@@ -1,7 +1,6 @@
 import { LoginUseCase } from './../../application/login.usecase';
 import { CreateUserUseCase } from './../../application/create-user.usecase';
-import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
-import { JwtAuthGuard } from '../guards/auth.guard';
+import { Body, Controller, Post } from '@nestjs/common';
 
 @Controller('auth')
 export class AuthController {
@@ -20,9 +19,4 @@ export class AuthController {
     return this.loginUseCase.execute(body.email, body.password);
   }
   
-  @Get('test')
-  @UseGuards(JwtAuthGuard)
-  getSecureData(@Req() req): string {
-    return `Hello, ${req.user.email}. This is secure data!`;
-  }
 }

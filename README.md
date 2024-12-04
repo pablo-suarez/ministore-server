@@ -31,6 +31,9 @@
 ```bash
 $ npm install
 ```
+ 
+## ⚠️ Storage
+For storage, the project is adapted for S3 & filesystem, the way to choose the storage mechanism is by the STORAGE_TYPE env variable.
 
 ## Compile and run the project
 

@@ -3,7 +3,7 @@ import { Model, QueryOptions, UpdateQuery } from "mongoose";
 
 @Injectable()
 export abstract class MongoRepository<MongoModel extends { _id: string, id: string }, Entity> {
-  constructor(private readonly model: Model<MongoModel>) { }
+  constructor(protected readonly model: Model<MongoModel>) { }
 
   async persists(data: Omit<MongoModel, '_id'>) {
     const result = await this.model.create({ _id: data.id, ...data });
