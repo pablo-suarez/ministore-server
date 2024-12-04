@@ -35,5 +35,11 @@ export abstract class MongoRepository<MongoModel extends { _id: string, id: stri
     return this.mapToPrimitives(result);
   }
 
+  async findOne(filter?: Record<string, any>) {
+    const result = await this.model.findOne(filter);
+    if (!result) return null;
+    return this.mapToPrimitives(result);
+  }
+
   abstract mapToPrimitives(input: MongoModel): Entity;
 }

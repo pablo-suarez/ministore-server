@@ -1,3 +1,4 @@
+import { AuthModule } from './../auth/auth.module';
 import { Module } from '@nestjs/common';
 import { OrderController } from './infrastructure/inbound/order.controller';
 import { CreateOrderUseCase } from './application/create-order.usecase';
@@ -12,7 +13,9 @@ import { GetTotalService } from './domain/services/get-total.service';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: Order.name, schema: OrderSchema }]), ProductModule
+    MongooseModule.forFeature([{ name: Order.name, schema: OrderSchema }]), 
+    ProductModule,
+    AuthModule
   ],
   providers: [{
     provide: OrdersRepositorySymbol,

@@ -1,3 +1,4 @@
+import { AuthModule } from './../auth/auth.module';
 import { Module } from '@nestjs/common';
 import { ProductController } from './infrastructure/inbound/controllers/product.controller';
 import { MongooseModule } from '@nestjs/mongoose';
@@ -12,7 +13,8 @@ import { FindProductByIdUseCase } from './application/find-by-id-product.usecase
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: Product.name, schema: ProductSchema }])
+    MongooseModule.forFeature([{ name: Product.name, schema: ProductSchema }]),
+    AuthModule
   ],
   providers: [{
     provide: ProductsRepositorySymbol,
