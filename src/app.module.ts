@@ -6,6 +6,7 @@ import mongoConfig from './common/config/mongo.config';
 import { MongoModule } from './mongodb/mongodb.module';
 import { ProductModule } from './product/product.module';
 import { FilesModule } from './common/file-storage/files.module';
+import { OrderModule } from './order/order.module';
 
 @Module({
   imports: [ConfigModule.forRoot({
@@ -15,7 +16,8 @@ import { FilesModule } from './common/file-storage/files.module';
   }),
   MongoModule,
   ProductModule,
-  FilesModule
+  FilesModule,
+  OrderModule
 ],
   controllers: [AppController],
   providers: [AppService],

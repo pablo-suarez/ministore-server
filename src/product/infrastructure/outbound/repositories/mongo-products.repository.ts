@@ -28,6 +28,10 @@ export class MongoProductsRepository extends MongoRepository<ProductModelMongo, 
         return this.findById(id);
     }
 
+    async findProductsByIds(ids: string[]): Promise<ProductEntity[]> {
+        return this.findManyByIds(ids);
+    }
+
     mapToPrimitives(data: ProductModelMongo): ProductEntity {
         return ProductEntity.fromPrimitives({
             id: data._id,

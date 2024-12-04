@@ -12,16 +12,19 @@ import { FindProductByIdUseCase } from './application/find-by-id-product.usecase
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: Product.name, schema: ProductSchema}])
+    MongooseModule.forFeature([{ name: Product.name, schema: ProductSchema }])
   ],
-  providers:[{
+  providers: [{
     provide: ProductsRepositorySymbol,
     useClass: MongoProductsRepository
-  },FileStorageProvider,
-  FileNaming,
-  FileSecureUrlAdapter,
-  CreateProductUseCase,
-  FindProductByIdUseCase],
-  controllers: [ProductController]
+  },
+    FileStorageProvider,
+    FileNaming,
+    FileSecureUrlAdapter,
+    CreateProductUseCase,
+    FindProductByIdUseCase
+  ],
+  controllers: [ProductController],
+  exports: [ProductsRepositorySymbol]
 })
-export class ProductModule {}
+export class ProductModule { }
